@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "npm run dev",
     "start": "npm run start",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
