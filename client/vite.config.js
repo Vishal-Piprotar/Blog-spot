@@ -1,16 +1,25 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
 
-// https://vitejs.dev/config/
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
 export default defineConfig({
+  plugins: [react()],
+  envDir: '.',
+  envPrefix: 'VITE_',
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://firebasestorage.googleapis.com',
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        },
       },
+      // Add your additional proxy configurations here if needed
     },
   },
-  plugins: [react()],
 });
